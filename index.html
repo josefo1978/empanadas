@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empanadas Del Norte - Tienda Online</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .slogan {
+            font-style: italic;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: #b71c1c;
+            padding: 1rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffcc00;
+        }
+        
+        /* Banner */
+        .banner {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1603133872878-684f208fb84b');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .banner p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+        
+        /* Productos */
+        .productos-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .productos-titulo {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #d32f2f;
+        }
+        
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .producto {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .producto-imagen {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .producto-info {
+            padding: 1.5rem;
+        }
+        
+        .producto-nombre {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .producto-descripcion {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .producto-precio {
+            font-weight: bold;
+            color: #d32f2f;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-agregar {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-agregar:hover {
+            background-color: #b71c1c;
+        }
+        
+        /* Carrito */
+        .carrito {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .carrito-icono {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .carrito-contador {
+            background-color: #d32f2f;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 1rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffcc00;
+        }
+        
+        .redes-sociales a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            border-top: 1px solid #555;
+            padding-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .banner h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Empanadas Del Norte</div>
+        <p class="slogan">Las más auténticas empanadas del país</p>
+    </header>
+    
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Banner -->
+    <section class="banner">
+        <h2>Empanadas artesanales 100% caseras</h2>
+        <p>Hechas con ingredientes frescos y recetas tradicionales que pasaron de generación en generación</p>
+    </section>
+    
+    <!-- Productos -->
+    <section class="productos-container" id="productos">
+        <h2 class="productos-titulo">Nuestras Especialidades</h2>
+        
+        <div class="productos">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <img src="https://imag.bonviveur.com/empanadas-argentinas-de-carne-foto-cerca.webp" alt="Empanada de Carne" class="producto-imagen">
+                <div class="producto-info">
+                    <h3 class="producto-nombre">Empanada de Carne</h3>
+                    <p class="producto-descripcion">Carne jugosa cortada a cuchillo con huevo, aceitunas y especias</p>
+                    <div class="producto-precio">$1.80 c/u</div>
+                    <button class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+            
+            <!-- Producto 2 -->
+            <div class="producto">
+                <img src="https://selloazul.ec/cdn/shop/articles/Empanadas_de_Pollo_MINI_BLOG.png?v=1707492899&width=1100" alt="Empanada de Pollo" class="producto-imagen">
+                <div class="producto-info">
+                    <h3 class="producto-nombre">Empanada de Pollo</h3>
+                    <p class="producto-descripcion">Pollo desmenuzado con cebolla, pimiento y un toque de crema</p>
+                    <div class="producto-precio">$1.70 c/u</div>
+                    <button class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+            
+            <!-- Producto 3 -->
+            <div class="producto">
+                <img src="https://www.clarin.com/img/2021/04/12/WYz8Yr8tB_360x240__1.jpg" alt="Empanada de Jamón y Queso" class="producto-imagen">
+                <div class="producto-info">
+                    <h3 class="producto-nombre">Jamón y Queso</h3>
+                    <p class="producto-descripcion">Clásica combinación de jamón cocido y queso mozzarella</p>
+                    <div class="producto-precio">$1.60 c/u</div>
+                    <button class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+            
+            <!-- Producto 4 -->
+            <div class="producto">
+                <img src="https://media.diariouno.com.ar/p/f1edc34431ea6f64154eea9f7efd3bec/adjuntos/298/imagenes/009/303/0009303500/1200x0/smart/empanadas-humita-1jpg.jpg" alt="Empanada de Humita" class="producto-imagen">
+                <div class="producto-info">
+                    <h3 class="producto-nombre">Empanada de Humita</h3>
+                    <p class="producto-descripcion">Crema de choclo fresco con cebolla y especias</p>
+                    <div class="producto-precio">$1.70 c/u</div>
+                    <button class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+            
+            <!-- Producto 5 -->
+            <div class="producto">
+                <img src="https://t2.rg.ltmcdn.com/es/posts/1/5/0/empanadas_de_queso_y_cebolla_7051_600.jpg" alt="Empanada de Queso y Cebolla" class="producto-imagen">
+                <div class="producto-info">
+                    <h3 class="producto-nombre">Queso y Cebolla</h3>
+                    <p class="producto-descripcion">Mezcla de quesos con cebolla caramelizada</p>
+                    <div class="producto-precio">$1.60 c/u</div>
+                    <button class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+            
+            <!-- Producto 6 -->
+            <div class="producto">
+                <img src="https://www.paulinacocina.net/wp-content/uploads/2023/02/empanadas-de-verdura-1.jpg" alt="Empanada de Verdura" class="producto-imagen">
+                <div class="producto-info">
+                    <h3 class="producto-nombre">Empanada de Verdura</h3>
+                    <p class="producto-descripcion">Espinaca, acelga y queso con un toque de nuez moscada</p>
+                    <div class="producto-precio">$1.60 c/u</div>
+                    <button class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Carrito -->
+    <div class="carrito">
+        <span class="carrito-icono">🛒</span>
+        <span class="carrito-contador">0</span>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info" id="contacto">
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Av. Siempre Viva 123</p>
+                <p>Tel: 555-1234</p>
+                <p>info@empanadasdelnorte.com</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Horarios</h3>
+                <p>Lunes a Viernes: 10am - 8pm</p>
+                <p>Sábados: 11am - 9pm</p>
+                <p>Domingos: Cerrado</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="redes-sociales">
+                    <a href="#">📱</a>
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Empanadas Del Norte - Todos los derechos reservados
+        </div>
+    </footer>
+    
+    <script>
+        // Funcionalidad básica del carrito
+        let carrito = [];
+        const contadorCarrito = document.querySelector('.carrito-contador');
+        const botonesAgregar = document.querySelectorAll('.btn-agregar');
+        
+        // Actualizar contador del carrito
+        function actualizarCarrito() {
+            contadorCarrito.textContent = carrito.length;
+        }
+        
+        // Agregar producto al carrito
+        botonesAgregar.forEach(boton => {
+            boton.addEventListener('click', (e) => {
+                const producto = e.target.closest('.producto');
+                const nombre = producto.querySelector('.producto-nombre').textContent;
+                const precio = producto.querySelector('.producto-precio').textContent;
+                
+                carrito.push({ nombre, precio });
+                actualizarCarrito();
+                
+                // Mostrar notificación
+                alert(`Agregaste ${nombre} al carrito\nPrecio: ${precio}`);
+            });
+        });
+    </script>
+</body>
+</html>
